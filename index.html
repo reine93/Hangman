@@ -4,9 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Hangman</title>
 </head>
 <body>
-    
+<h1>Hang the wise man</h1>
+<form class="name-input">
+    <label for="playerName">Please enter your name</label>
+    <input type="text" name="playerName" required>
+    <button id="submit-name">Submit</button>
+</form>
+<div class = "maingame-display">
+    <div class="player-name"></div>
+    <div class="game-timer"></div>
+    <div class ="error-display">
+        <p> Errors: 0 </p>
+    </div>
+    <div class = "quote-display"></div>
+    <form class = "guess-input">
+        <input type="text" name="charInput" maxlength = "1" required>
+        <button id = "submit-guess">Guess!</button>
+        <div class = "input-error-display"></div>        
+    </form>
+    <div class = "used-chars"></div>
+    <div class= "game-reset-btn">
+    <button id="reset-game">Reset game</button>
+    </div>
+</div>
+<div class = "highscore-table">
+    <p id="highscore-header">Highscores:</p>
+    <table>
+        <thead>
+            <th>Username</th>
+            <th>Score</th>
+        </thead>
+        <tbody id = "HStable-rows">
+        </tbody>
+    </table>
+</div>
+<script src="scripts/hangman_game/hangmanData.js"></script>
+<script src="scripts/ui.js"></script>
+<script src="scripts/hangman_game/gameTimer.js"></script>
+<script src="scripts/hangman_game/gameMechanics.js"></script>
+<script src="scripts/app.js"></script>
 </body>
 </html>
+

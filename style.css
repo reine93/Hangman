@@ -1,0 +1,23 @@
+.name-input {
+    display: block
+}
+
+.maingame-display {
+    display: none
+}
+
+.test-game-finish {
+    display: block
+}
+
+.guess-input {
+    display: block
+}
+
+.highscore-table{
+    display: none
+}
+
+.input-error-display {
+    color: red;
+}
