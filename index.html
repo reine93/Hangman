@@ -20,12 +20,16 @@
     <div class ="error-display">
         <p> Errors: 0 </p>
     </div>
+    <canvas id="hangmanCanvas" width="400" height="400"></canvas>
     <div class = "quote-display"></div>
     <form class = "guess-input">
         <input type="text" name="charInput" maxlength = "1" required>
         <button id = "submit-guess">Guess!</button>
         <div class = "input-error-display"></div>        
     </form>
+    <div class ="game-over">
+        <p>Game over awww!</p>
+    </div>
     <div class = "used-chars"></div>
     <div class= "game-reset-btn">
     <button id="reset-game">Reset game</button>
@@ -46,6 +50,7 @@
 <script src="scripts/ui.js"></script>
 <script src="scripts/hangman_game/gameTimer.js"></script>
 <script src="scripts/hangman_game/gameMechanics.js"></script>
+<script src="scripts/hangman_game/hangmanDraw.js"></script>
 <script src="scripts/app.js"></script>
 </body>
 </html>

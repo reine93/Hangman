@@ -1,6 +1,7 @@
 
 const userInterface = new UserInterface();
 const hangmanData = new HangmanData();
+const hangmanDraw = new HangmanDraw(userInterface.displayCanvas)
 
 userInterface.gameReset.addEventListener("click", () => {
     gameMechanics.resetGame();
@@ -14,6 +15,7 @@ userInterface.nameForm.addEventListener("click", e => {
         if (userInterface.nameForm.playerName.value != ""){
             gameMechanics.initializeQuote();
             userInterface.initGameUI();
+            hangmanDraw.drawGallows();
         }
          else {
             alert("Please enter a name")

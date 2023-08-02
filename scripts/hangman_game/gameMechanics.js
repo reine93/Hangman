@@ -1,4 +1,3 @@
-
 const gameMechanics = (() => {
 
 let playerName;
@@ -93,6 +92,11 @@ const checkGuess = guess => {
         wrongGuess += 1
         userInterface.displayNumError(wrongGuess)
         userInterface.displayInputError("wrongGuess")
+        hangmanDraw.drawHangman(wrongGuess)
+        if (wrongGuess >= 6) {
+            gameTimer.stopTicking();
+            userInterface.displayGameOver();
+        }
     }
     usedChars.push(guess.toLowerCase())
     userInterface.displayUsedChar(usedChars.join(", "));
@@ -108,8 +112,7 @@ const resetGame = () => {
     wrongGuess = 0;
     usedChars = [];
     initializeQuote();
-
-
+    hangmanDraw.freeHangman();
 }
     
 return {

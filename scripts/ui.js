@@ -11,7 +11,10 @@ class UserInterface {
         this.highscoreTable = document.querySelector("#HStable-rows");
         this.gameReset = document.querySelector("#reset-game");
         this.nameForm = document.querySelector(".name-input");
-        this.guessInput = document.querySelector(".guess-input")
+        this.guessInput = document.querySelector(".guess-input");
+        this.displayCanvas = document.querySelector("#hangmanCanvas");
+        this.gameOver = document.querySelector(".game-over")
+
     }
 
     initGameUI() {
@@ -21,11 +24,17 @@ class UserInterface {
     }
 
     resetGameUI() {
+        this.gameOver.style.display = "none";
         this.guessInput.style.display = "block";
         this.inputErrorDisplay.innerHTML = "";
         this.highscoreDisplay.style.display = "none";
         this.errorDisplay.innerHTML = `<p> Errors: 0 </p>`;
         this.usedCharDisplay.innerHTML = "";
+    }
+
+    displayGameOver() {
+        this.guessInput.style.display = "none";
+        this.gameOver.style.display = "block"
     }
 
     displayTime(time) {
@@ -38,6 +47,7 @@ class UserInterface {
 
     displayQuoteStr(guessQuote) {
         this.quoteDisplay.innerHTML = `<p>Guess a saying!</p><p>${guessQuote}</p>`;
+
     }
 
     showAnswer(answer) {
