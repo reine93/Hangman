@@ -1,5 +1,5 @@
 class UserInterface {
-    constructor() {
+    constructor() { //element selectors
         this.gameDisplay = document.querySelector(".maingame-display");
         this.nameDisplay = document.querySelector(".player-name");
         this.errorDisplay = document.querySelector(".error-display");
@@ -17,13 +17,13 @@ class UserInterface {
 
     }
 
-    initGameUI() {
+    initGameUI() { //hide name form, display char name and game display
         this.nameDisplay.innerHTML = `<span>Name: ${gameMechanics.initPlayerName()}</span>`;
         this.nameForm.style.display = "none";
         this.gameDisplay.style.display = "block";
     }
 
-    resetGameUI() {
+    resetGameUI() { //reset UI
         this.gameOver.style.display = "none";
         this.guessInput.style.display = "block";
         this.inputErrorDisplay.innerHTML = "";
@@ -32,30 +32,30 @@ class UserInterface {
         this.usedCharDisplay.innerHTML = "";
     }
 
-    displayGameOver() {
+    displayGameOver() { //hide guess input and show game over instead
         this.guessInput.style.display = "none";
         this.gameOver.style.display = "block"
     }
 
-    displayTime(time) {
+    displayTime(time) { //display elapsed time in sec
         this.timeDisplay.innerHTML = `<p>Time elapsed: ${time} sec</p>`;
     }
 
-    displayUsedChar(usedChar) {
+    displayUsedChar(usedChar) { //display used chars
         this.usedCharDisplay.innerHTML = `<p>Used letters: ${usedChar}`;
     }
 
-    displayQuoteStr(guessQuote) {
+    displayQuoteStr(guessQuote) { //display guess quote
         this.quoteDisplay.innerHTML = `<p>Guess a saying!</p><p>${guessQuote}</p>`;
 
     }
 
-    showAnswer(answer) {
+    showAnswer(answer) { //show answer (data.content)
         this.guessInput.style.display = "none";
         this.quoteDisplay.innerHTML = `<p>The answer is:</p><p>${answer}</p>`;
     }
 
-    displayInputError(errorType) {
+    displayInputError(errorType) { //errors for guess char input
         switch (errorType) {
             case 'alphabetOnly':
                 this.inputErrorDisplay.innerHTML = "<p>Alphabet chars only</p>";
@@ -67,29 +67,29 @@ class UserInterface {
                 this.inputErrorDisplay.innerHTML = "<p>Wrong guess!</p>";
                 break;
             default:
-                this.inputErrorDisplay.innerHTML = ""; // Default case, clear the error display
+                this.inputErrorDisplay.innerHTML = ""; // default case, clear the error display
         }
     }
 
-    displayNumError(num) {
+    displayNumError(num) { //display num of errors
         this.errorDisplay.innerHTML = `<p> Errors: ${num} </p>`;
     }
 
-    displayHighscores() {
+    displayHighscores() { //fetch highscores, sort and display
         hangmanData.getHighscoreData()
             .then(highscore => this.sortHighscores(highscore))
             .catch(err => console.log(err));
     }
 
-    sortHighscores(data) {
+    sortHighscores(data) { //sorts fetched highscores
         let highScores;
         const calculateScore = (player) => {
-            return (100 / (1 + player.errors)).toFixed(2);
+            return (100 / (1 + player.errors)).toFixed(2); //score is calculated as 100 / (1 + num of errs)
         };
         highScores = data.map(player => ({ username: player.userName, score: calculateScore(player) }));
-        highScores.sort((a, b) => b.score - a.score);
+        highScores.sort((a, b) => b.score - a.score); //sorts from higher score to lower
 
-        let tables = highScores.map(item => {
+        let tables = highScores.map(item => { //renders table
             return `
             <tr>
                 <td>${item.username}</td>
@@ -97,7 +97,7 @@ class UserInterface {
             </tr>
         `;
         }).join("");
-
+        //displays table
         this.highscoreTable.innerHTML = tables;
         this.highscoreDisplay.style.display = "block";
     }

@@ -1,8 +1,8 @@
-const userInterface = new UserInterface();
-const hangmanData = new HangmanData();
-const hangmanDraw = new HangmanDraw(userInterface.displayCanvas)
+const userInterface = new UserInterface(); //init UI
+const hangmanData = new HangmanData(); //API calls
+const hangmanDraw = new HangmanDraw(userInterface.displayCanvas) //init canvas
 
-userInterface.gameReset.addEventListener("click", () => {
+userInterface.gameReset.addEventListener("click", () => { //reset game if reset btn is clicked
     gameMechanics.resetGame();
     userInterface.resetGameUI();
 })
@@ -11,7 +11,7 @@ userInterface.gameReset.addEventListener("click", () => {
 userInterface.nameForm.addEventListener("submit", e => {
     e.preventDefault();
   
-    if (userInterface.nameForm.playerName.value != ""){
+    if (userInterface.nameForm.playerName.value != ""){ //on submit if name not empty start game
         gameMechanics.initializeQuote();
         userInterface.initGameUI();
         hangmanDraw.drawGallows();
@@ -21,21 +21,21 @@ userInterface.nameForm.addEventListener("submit", e => {
     }
 })
 
-userInterface.guessInput.addEventListener("submit", e => {
-    let guessValue = userInterface.guessInput.charInput.value
+userInterface.guessInput.addEventListener("submit", e => { //on char submit
+    let guessValue = userInterface.guessInput.charInput.value //guess char
     e.preventDefault();
-    if (!gameMechanics.checkIfLetter(guessValue))
+    if (!gameMechanics.checkIfLetter(guessValue)) //if guess char not letter display error 
     {
         userInterface.displayInputError("alphabetOnly")
     }
-    else if(gameMechanics.checkUsedChar(guessValue))
+    else if(gameMechanics.checkUsedChar(guessValue)) //if char already used display error
     {   
         userInterface.displayInputError("alreadyUsed")
     }
     else {
-        gameMechanics.checkGuess(guessValue)
+        gameMechanics.checkGuess(guessValue) //check if guess char correct
     }
-    userInterface.guessInput.reset();
+    userInterface.guessInput.reset(); //clear input field
 
 
 })

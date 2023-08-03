@@ -1,10 +1,11 @@
 class HangmanData {
     constructor() {
-        this.getQuoteUrl = "http://api.quotable.io/random";
-        this.maxLength = "maxLength=50";
-        this.highscoresURL = "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores"
+        this.getQuoteUrl = "http://api.quotable.io/random";  //fetch quote URL
+        this.maxLength = "maxLength=50"; //defined max char length for quote URL
+        this.highscoresURL = "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores" //fetch and post url for highscore data
     }
 
+        //fetches and returns quote data
     async getQuoteData() {
         const quote = `${this.getQuoteUrl}?${this.maxLength}`
         const response = await fetch(quote);
@@ -14,7 +15,7 @@ class HangmanData {
         const data = await response.json();
         return data
     }
-
+        //sends score data
     async sendHighscoreData (quoteId, length, uniqueCharacters, userName, errors, duration) {
         const response = await fetch (this.highscoresURL, {
             method: "POST",
@@ -36,7 +37,7 @@ class HangmanData {
         }
     
     }
-
+        //fetches highscore data
     async getHighscoreData () {
         const response = await fetch(this.highscoresURL);
         if(response.status !== 200){
