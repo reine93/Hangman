@@ -1,7 +1,7 @@
 class HangmanData {
     constructor() {
         this.getQuoteUrl = "http://api.quotable.io/random";  //fetch quote URL
-        this.maxLength = "maxLength=50"; //defined max char length for quote URL
+        this.maxLength = "maxLength=30"; //defined max char length for quote URL
         this.highscoresURL = "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores" //fetch and post url for highscore data
     }
 

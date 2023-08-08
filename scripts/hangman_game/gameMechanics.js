@@ -70,13 +70,15 @@ const initializeQuote = () => {
     }
 }
 
+
 //checks if user has guessed all letters, stops game, sends and display highscores
 const checkGameOver = () => {
     if (quoteArr.toString() === guessQuote.toString()) {
-        gameTimer.stopTicking();        
         hangmanData.sendHighscoreData(dataQuote._id, dataQuote.length, uniqueChars, playerName, wrongGuess,gameTimer.elapsedTime)
         userInterface.showAnswer(dataQuote.content)
         userInterface.displayHighscores();
+        gameTimer.stopTicking();        
+
     }
 }
 
@@ -98,10 +100,11 @@ const checkGuess = guess => {
         userInterface.displayNumError(wrongGuess) 
         userInterface.displayInputError("wrongGuess")
         hangmanDraw.drawHangman(wrongGuess)
+
         //if 6 errors(entire hangman) then game over
         if (wrongGuess >= 6) {
-            gameTimer.stopTicking();
             userInterface.displayGameOver();
+            gameTimer.stopTicking();        
         }
     }
     //any guess char gets pushed to usedChars array and displayed
@@ -118,8 +121,11 @@ const checkIfLetter = char => guessPattern.test(char)
 const resetGame = () => {
     wrongGuess = 0;
     usedChars = [];
+    gameTimer.stopTicking();
     initializeQuote();
+    userInterface.resetGameUI();
     hangmanDraw.freeHangman();
+
 }
     
 return { //public functions

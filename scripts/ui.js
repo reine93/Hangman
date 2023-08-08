@@ -13,22 +13,23 @@ class UserInterface {
         this.nameForm = document.querySelector(".name-input");
         this.guessInput = document.querySelector(".guess-input");
         this.displayCanvas = document.querySelector("#hangmanCanvas");
-        this.gameOver = document.querySelector(".game-over")
+        this.gameOver = document.querySelector(".game-over");
+        this.errorNum = document.querySelector(".errornum")
 
     }
 
     initGameUI() { //hide name form, display char name and game display
         this.nameDisplay.innerHTML = `<span>Name: ${gameMechanics.initPlayerName()}</span>`;
         this.nameForm.style.display = "none";
-        this.gameDisplay.style.display = "block";
+        this.gameDisplay.style.display = "flex";
     }
 
     resetGameUI() { //reset UI
         this.gameOver.style.display = "none";
-        this.guessInput.style.display = "block";
+        this.guessInput.style.display = "flex";
         this.inputErrorDisplay.innerHTML = "";
         this.highscoreDisplay.style.display = "none";
-        this.errorDisplay.innerHTML = `<p> Errors: 0 </p>`;
+        this.displayNumError(0)
         this.usedCharDisplay.innerHTML = "";
     }
 
@@ -38,11 +39,15 @@ class UserInterface {
     }
 
     displayTime(time) { //display elapsed time in sec
-        this.timeDisplay.innerHTML = `<p>Time elapsed: ${time} sec</p>`;
+        this.timeDisplay.innerHTML = `Time elapsed: ${time} sec`;
+    }
+
+    displayErrColor(errColor) {
+        this.errorNum.id = errColor;
     }
 
     displayUsedChar(usedChar) { //display used chars
-        this.usedCharDisplay.innerHTML = `<p>Used letters: ${usedChar}`;
+        this.usedCharDisplay.innerHTML = `Used letters: ${usedChar}`;
     }
 
     displayQuoteStr(guessQuote) { //display guess quote
@@ -52,19 +57,19 @@ class UserInterface {
 
     showAnswer(answer) { //show answer (data.content)
         this.guessInput.style.display = "none";
-        this.quoteDisplay.innerHTML = `<p>The answer is:</p><p>${answer}</p>`;
+        this.quoteDisplay.innerHTML = `<p>The answer is: </p><p>${answer}</p>`;
     }
 
     displayInputError(errorType) { //errors for guess char input
         switch (errorType) {
             case 'alphabetOnly':
-                this.inputErrorDisplay.innerHTML = "<p>Alphabet chars only</p>";
+                this.inputErrorDisplay.innerHTML = "Alphabet letters only";
                 break;
             case 'alreadyUsed':
-                this.inputErrorDisplay.innerHTML = "<p>You already used this char</p>";
+                this.inputErrorDisplay.innerHTML = "You already used this letter";
                 break;
             case 'wrongGuess':
-                this.inputErrorDisplay.innerHTML = "<p>Wrong guess!</p>";
+                this.inputErrorDisplay.innerHTML = "Wrong guess!";
                 break;
             default:
                 this.inputErrorDisplay.innerHTML = ""; // default case, clear the error display
@@ -72,33 +77,50 @@ class UserInterface {
     }
 
     displayNumError(num) { //display num of errors
-        this.errorDisplay.innerHTML = `<p> Errors: ${num} </p>`;
+        this.errorNum.innerHTML = `${num}`;
+        switch (true) {
+            case (num >= 6):
+                this.displayErrColor("GOerror")
+                break;
+            case (num >= 4):
+                this.displayErrColor("dangererror")
+                break;
+            case (num >= 2):
+                this.displayErrColor("mederror")
+                break;
+            default:
+                this.displayErrColor("lilerror")
+                break;
+        }
     }
 
     displayHighscores() { //fetch highscores, sort and display
         hangmanData.getHighscoreData()
-            .then(highscore => this.sortHighscores(highscore))
+            .then(highscore => sortHighscores(highscore))
             .catch(err => console.log(err));
+
+            const sortHighscores = data => { //sorts fetched highscores
+                let highScores;
+                const calculateScore = (player) => {
+                    return (100 / (1 + player.errors)).toFixed(2); //score is calculated as 100 / (1 + num of errs)
+                };
+                highScores = data.map(player => ({ username: player.userName, score: calculateScore(player) }));
+                highScores.sort((a, b) => b.score - a.score); //sorts from higher score to lower
+        
+                let tables = highScores.map(item => { //renders table
+                    return `
+                    <tr>
+                        <td>${item.username}</td>
+                        <td>${item.score}</td>
+                    </tr>
+                `;
+                }).join("");
+                //displays table
+                this.highscoreTable.innerHTML = tables;
+                this.highscoreDisplay.style.display = "flex";
+                this.highscoreDisplay.scrollIntoView({behavior: "smooth"});
+            }
     }
 
-    sortHighscores(data) { //sorts fetched highscores
-        let highScores;
-        const calculateScore = (player) => {
-            return (100 / (1 + player.errors)).toFixed(2); //score is calculated as 100 / (1 + num of errs)
-        };
-        highScores = data.map(player => ({ username: player.userName, score: calculateScore(player) }));
-        highScores.sort((a, b) => b.score - a.score); //sorts from higher score to lower
 
-        let tables = highScores.map(item => { //renders table
-            return `
-            <tr>
-                <td>${item.username}</td>
-                <td>${item.score}</td>
-            </tr>
-        `;
-        }).join("");
-        //displays table
-        this.highscoreTable.innerHTML = tables;
-        this.highscoreDisplay.style.display = "block";
-    }
 }
