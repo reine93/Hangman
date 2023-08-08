@@ -4,7 +4,6 @@ const hangmanDraw = new HangmanDraw(userInterface.displayCanvas) //init canvas
 
 userInterface.gameReset.addEventListener("click", () => { //reset game if reset btn is clicked
     gameMechanics.resetGame();
-    userInterface.resetGameUI();
 })
 
 
@@ -22,8 +21,8 @@ userInterface.nameForm.addEventListener("submit", e => {
 })
 
 userInterface.guessInput.addEventListener("submit", e => { //on char submit
-    let guessValue = userInterface.guessInput.charInput.value //guess char
     e.preventDefault();
+    let guessValue = userInterface.guessInput.charInput.value //guess char
     if (!gameMechanics.checkIfLetter(guessValue)) //if guess char not letter display error 
     {
         userInterface.displayInputError("alphabetOnly")

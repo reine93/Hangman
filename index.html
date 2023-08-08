@@ -6,53 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Borel">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=REM"> 
+ 
     <title>Hangman</title>
 </head>
 <body>
-<h1>Hang the wise man</h1>
-<form class="name-input">
-    <label for="playerName">Please enter your name</label>
-    <input type="text" name="playerName" required>
-    <button id="submit-name">Submit</button>
-</form>
-<div class = "maingame-display">
-    <div class="player-name"></div>
-    <div class="game-timer"></div>
-    <div class ="error-display">
-        <p> Errors: 0 </p>
+    <div class="flex-container">
+        <div class = "hangman-title">
+            <h1 class="title-header">Hang the wise man</h1>
+        </div>
+        <form class="name-input">
+            <label for="playerName" id="enter-name">Please enter your name</label>
+            <input type="text" name="playerName" id="playername-input">
+            <button id="submit-name">Submit</button>
+        </form>
+        <div class = "maingame-display">
+            <div class="game-info">
+                <div class="player-name"></div>
+                <div class="game-timer"></div>
+                <div class ="error-display">Errors: <span class="errornum" id="lilerror">0</span></div>
+                <div class = "used-chars"></div>
+            </div>
+            <div class="hangman-canvas">
+                <canvas id="hangmanCanvas" width="400" height="400"></canvas>
+            </div>
+            <div class = "quote-display"></div>
+            <div class = "guess-box">
+                <form class = "guess-input">
+                    <p id="input-info">Enter a letter in box below</p>
+                    <input type="text" name="charInput" id="char-input" maxlength = "1" required>
+                    <div class = "input-error-display"></div> 
+                    <button id = "submit-guess">Guess!</button>
+                </form>
+                <div class ="game-over">
+                    <p>Game over awww!</p>
+                </div>
+                <div class= "game-reset-btn">
+                    <button id="reset-game">Reset game</button>
+                </div>
+            </div>
+        </div>
+        <div class = "highscore-table">
+            <p id="highscore-header">Highscores</p>
+            <table>
+                <thead>
+                    <th>Username</th>
+                    <th>Score</th>
+                </thead>
+                <tbody id = "HStable-rows">
+                </tbody>
+            </table>
+        </div>
     </div>
-    <canvas id="hangmanCanvas" width="400" height="400"></canvas>
-    <div class = "quote-display"></div>
-    <form class = "guess-input">
-        <input type="text" name="charInput" maxlength = "1" required>
-        <button id = "submit-guess">Guess!</button>
-        <div class = "input-error-display"></div>        
-    </form>
-    <div class ="game-over">
-        <p>Game over awww!</p>
-    </div>
-    <div class = "used-chars"></div>
-    <div class= "game-reset-btn">
-    <button id="reset-game">Reset game</button>
-    </div>
-</div>
-<div class = "highscore-table">
-    <p id="highscore-header">Highscores:</p>
-    <table>
-        <thead>
-            <th>Username</th>
-            <th>Score</th>
-        </thead>
-        <tbody id = "HStable-rows">
-        </tbody>
-    </table>
-</div>
-<script src="scripts/hangman_game/hangmanData.js"></script>
-<script src="scripts/ui.js"></script>
-<script src="scripts/hangman_game/gameTimer.js"></script>
-<script src="scripts/hangman_game/gameMechanics.js"></script>
-<script src="scripts/hangman_game/hangmanDraw.js"></script>
-<script src="scripts/app.js"></script>
-</body>
+    <script src="scripts/hangman_game/hangmanData.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/hangman_game/gameTimer.js"></script>
+    <script src="scripts/hangman_game/gameMechanics.js"></script>
+    <script src="scripts/hangman_game/hangmanDraw.js"></script>
+    <script src="scripts/app.js"></script>
+    </body>
 </html>
 
