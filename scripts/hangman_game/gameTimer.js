@@ -1,20 +1,21 @@
 class GameTimer {
     constructor() {
-      this.startTime = 0;
-      this.updatedTimer = null;
+      this.startTime;
+      this.updatedTimer;
       this.elapsedTime = 0;
       this.timeInSec = 0;
     }
-  //defines time and sets interval
+  //defines start time and initializes tickTock() every sec
     startTicking() {
       this.startTime = Date.now();
       this.updatedTimer = setInterval(() => this.tickTock(), 1);
     }
-  //stops (clears) interval
+  //stops initializing tickTock()
     stopTicking() {
       clearInterval(this.updatedTimer);
+      return;
     }
-  //called every second by startTicking(), defines elapsed time in ms and displays timeInSec
+  // calculates elapsed time in ms and displays timeInSec
     tickTock() {
       const currentTime = Date.now();
       this.elapsedTime = currentTime - this.startTime;
