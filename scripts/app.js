@@ -2,7 +2,7 @@ const userInterface = new UserInterface(); //init UI
 const hangmanData = new HangmanData(); //API calls
 const hangmanDraw = new HangmanDraw(userInterface.displayCanvas) //init canvas
 
-userInterface.gameReset.addEventListener("click", () => { //reset game if reset btn is clicked
+userInterface.gameReset.addEventListener("click", () => {//reset game if reset btn is clicked
     gameMechanics.resetGame();
 })
 

@@ -38,6 +38,7 @@ class UserInterface {
         this.gameOver.style.display = "block"
     }
 
+
     displayTime(time) { //display elapsed time in sec
         this.timeDisplay.innerHTML = `Time elapsed: ${time} sec`;
     }
@@ -51,7 +52,7 @@ class UserInterface {
     }
 
     displayQuoteStr(guessQuote) { //display guess quote
-        this.quoteDisplay.innerHTML = `<p>Guess a saying!</p><p>${guessQuote}</p>`;
+        this.quoteDisplay.innerHTML = `<p>Guess a saying!</p><br><p>${guessQuote}</p>`;
 
     }
 
