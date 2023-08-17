@@ -2,6 +2,13 @@ class HangmanDraw {//uses HTML5 Canvas API to draw hangman
     constructor(canvas) {
         this.canvas = canvas; 
         this.ctx = canvas.getContext("2d");
+        /*  mozda da kooristimo objekt
+            this.hangmanParts = {
+                head: () => ...,
+                body: () => ...
+            }
+            Na taj način ne moramo pamtiti indekse
+        */  
         this.hangmanParts = [ //array of hangman parts (stick figure)
             //head
             () => {

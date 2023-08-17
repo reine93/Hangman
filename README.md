@@ -1,3 +1,9 @@
+/*
+    - uvijek je dobro spomenuti kako se program pokreće (čak i kada je trivijalno), makar s pola rečenice
+    - s obzirom da se radi o čistom frontendu, jako je jednostavno imati online verziju koja je odmah igriva (netlify npr. možda čak i github pages, ali nisam siguran), pa ljudi to često rade
+    - dobra navika je engleski tekst provesti kroz grammarly ili nešto slično (ako nam se pobrkaju slova i sl.) 
+*/
+
 # Hangman
 
 ## About the Game
