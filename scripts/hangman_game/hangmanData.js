@@ -1,6 +1,14 @@
+/*
+    Zbog čitljivosti i profesionalnog dojma, valja paziti na indentaciju koda.
+    To možemo podesiti automatski u IDEu koji koristimo ili koristiti npr. prettier.
+*/
 class HangmanData {
     constructor() {
         this.getQuoteUrl = "http://api.quotable.io/random";  //fetch quote URL
+        /* 
+            čišće bi bilo da this.maxLength bude samo broj
+            na ovaj način miješamo sam parametar (30) i način kako se upotrebljava
+        */
         this.maxLength = "maxLength=30"; //defined max char length for quote URL
         this.highscoresURL = "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores" //fetch and post url for highscore data
     }

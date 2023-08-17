@@ -44,6 +44,7 @@ class UserInterface {
     }
 
     displayErrColor(errColor) {
+        /* konvencionalno se za ovu svrhu koriste klase */
         this.errorNum.id = errColor;
     }
 
@@ -62,6 +63,10 @@ class UserInterface {
     }
 
     displayInputError(errorType) { //errors for guess char input
+        /*
+            Što postižemo s error typeom?
+            Zašto ne zovemo direktno .displayInputError("Alphabet letters only") npr?
+        */
         switch (errorType) {
             case 'alphabetOnly':
                 this.inputErrorDisplay.innerHTML = "Alphabet letters only";
@@ -79,6 +84,16 @@ class UserInterface {
 
     displayNumError(num) { //display num of errors
         this.errorNum.innerHTML = `${num}`;
+        /*
+         krace/citljivije bi bilo 
+         if (num >=6) return this.displayError("GOerror");
+            ...
+
+
+         također (konvencionalno za greške), slobodno koristimo i dvije klase
+         npr. error danger
+              error warning
+        */
         switch (true) {
             case (num >= 6):
                 this.displayErrColor("GOerror")
@@ -96,6 +111,10 @@ class UserInterface {
     }
 
     displayHighscores() { //fetch highscores, sort and display
+        /*
+            tu malo miješamo odgovornosti (dohvat, formatiranje i prikaz podataka)
+            bolje bi bilo da displayHighscores dobije listu [{username, score}] i samo je prikaže
+        */
         hangmanData.getHighscoreData()
             .then(highscore => sortHighscores(highscore))
             .catch(err => console.log(err));

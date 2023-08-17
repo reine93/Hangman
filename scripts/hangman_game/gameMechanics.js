@@ -34,15 +34,15 @@ const initializeQuote = () => {
 
     const generateQuote = quote => {
         //empty previous guess array if not empty
-        if (guessQuote != []) {
+        if (guessQuote != []) { // [] != [] je uvijek true - arrayi se uspoređuju po referenci, ne po vrijednostima
             guessQuote = []
         }
         //generate array from quote data
         quoteArr = quote.split("").map(char => {
-            if (char == " ") {
+            if (char == " ") { // ovdje miješamo samu tehniku prikaza sa mehanikom igre
                 return "&nbsp;" //returns space
             }
-            else {
+            else { // else nam ovdje ne treba
                 return char
             }
         })
@@ -60,13 +60,13 @@ const initializeQuote = () => {
     
     //counts number of unique letters (and only letters) in quote array, case insensitive
     const uniqueCharCount = () => {
-        const uniq = [];
+        const uniq = []; // ako ispitujemo samo pripadnost ili ne-pripadnost, možemo koristiti Set()
         quoteArr.forEach(char => {
             if (!uniq.includes(char.toLowerCase()) && guessPattern.test(char)) {
                 uniq.push(char.toLowerCase())
             }
         })
-        uniqueChars = uniq.length
+        uniqueChars = uniq.length // nema potrebe da spremamo uniqueChars, možemo pozvati uniqueCharCount() kad ga koristimo. Uvijek pokušavamo držati stvari što "lokalnije" (i u vremenu i u scopeu)
     }
 }
 
