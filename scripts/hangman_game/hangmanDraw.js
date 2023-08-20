@@ -2,44 +2,38 @@ class HangmanDraw {//uses HTML5 Canvas API to draw hangman
     constructor(canvas) {
         this.canvas = canvas; 
         this.ctx = canvas.getContext("2d");
-        this.hangmanParts = [ //array of hangman parts (stick figure)
-            //head
-            () => {
+        this.hangmanParts = {
+            head: () => {
                 this.ctx.beginPath();
                 this.ctx.arc(200, 100, 30, 0, Math.PI * 2);
                 this.ctx.stroke();
             },
-            //body
-            () => {
+            body: () => {
                 this.ctx.moveTo(200, 130);
                 this.ctx.lineTo(200, 250);
                 this.ctx.stroke();
             },
-            //left arm
-            () => {
+            leftArm: () => {
                 this.ctx.moveTo(200, 150);
                 this.ctx.lineTo(160, 200);
                 this.ctx.stroke();
             },
-            //right arm
-            () => {
+            rightArm: () => {
                 this.ctx.moveTo(200, 150);
                 this.ctx.lineTo(240, 200);
                 this.ctx.stroke();
             },
-            //left leg
-            () => {
+            leftLeg: () => {
                 this.ctx.moveTo(200, 250);
                 this.ctx.lineTo(180, 300);
                 this.ctx.stroke();
             },
-            //right leg
-            () => {
+            rightLeg: () => {
                 this.ctx.moveTo(200, 250);
                 this.ctx.lineTo(220, 300);
                 this.ctx.stroke();
             }
-        ];
+        };
     }
     //clears canvas
     clearCanvas() {
@@ -66,27 +60,27 @@ class HangmanDraw {//uses HTML5 Canvas API to draw hangman
         switch (wrongGuess) {
             case 1:
                 //draws head
-                this.hangmanParts[0]();
+                this.hangmanParts.head();
                 break;
             case 2:
                 //draws body
-                this.hangmanParts[1]();
+                this.hangmanParts.body();
                 break;
             case 3:
                 //draws left arm
-                this.hangmanParts[2]();
+                this.hangmanParts.leftArm();
                 break;
             case 4:
                 //draws right arm
-                this.hangmanParts[3]();
+                this.hangmanParts.rightArm();
                 break;
             case 5:
                 //draws left leg
-                this.hangmanParts[4]();
+                this.hangmanParts.leftLeg();
                 break;
             case 6:
                 //draws right leg
-                this.hangmanParts[5]();
+                this.hangmanParts.rightLeg();
                 break;
             default:
                 break;

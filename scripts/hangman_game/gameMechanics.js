@@ -33,48 +33,37 @@ const initializeQuote = () => {
     }
 
     const generateQuote = quote => {
-        //empty previous guess array if not empty
-        if (guessQuote != []) {
-            guessQuote = []
-        }
+        guessQuote = []
+
         //generate array from quote data
         quoteArr = quote.split("").map(char => {
             if (char == " ") {
                 return "&nbsp;" //returns space
             }
-            else {
                 return char
-            }
         })
         //generate guess array (with __ instead of letters) from quote array
         guessQuote = quoteArr.map(char => {
             if (guessPattern.test(char)) {
                 return "__" //returns ___ if letter
             }
-            else {
                 return char //displays other chars 
-            }
         })
         
     }
     
-    //counts number of unique letters (and only letters) in quote array, case insensitive
-    const uniqueCharCount = () => {
-        const uniq = [];
-        quoteArr.forEach(char => {
-            if (!uniq.includes(char.toLowerCase()) && guessPattern.test(char)) {
-                uniq.push(char.toLowerCase())
-            }
-        })
-        uniqueChars = uniq.length
-    }
 }
 
+//counts number of unique letters (and only letters) in quote array, case insensitive
+const uniqueCharCount = () => {
+    return [...new Set(quoteArr)].filter((char) => guessPattern.test(char)).length;
+
+}
 
 //checks if user has guessed all letters, stops game, sends and display highscores
 const checkGameOver = () => {
     if (quoteArr.toString() === guessQuote.toString()) {
-        hangmanData.sendHighscoreData(dataQuote._id, dataQuote.length, uniqueChars, playerName, wrongGuess,gameTimer.elapsedTime)
+        hangmanData.sendHighscoreData(dataQuote._id, dataQuote.length, uniqueCharCount(), playerName, wrongGuess,gameTimer.elapsedTime)
         userInterface.showAnswer(dataQuote.content)
         userInterface.displayHighscores();
         gameTimer.stopTicking();        
@@ -98,7 +87,7 @@ const checkGuess = guess => {
     else { //if not then increment and display num of wrong guesses, draw hangman part
         wrongGuess += 1
         userInterface.displayNumError(wrongGuess) 
-        userInterface.displayInputError("wrongGuess")
+        userInterface.displayInputError("Wrong guess!")
         hangmanDraw.drawHangman(wrongGuess)
 
         //if 6 errors(entire hangman) then game over
@@ -113,7 +102,7 @@ const checkGuess = guess => {
     
 }
 //checks if guess char has been used
-const checkUsedChar = (char) =>  usedChars.includes(char.toLowerCase())
+const checkUsedChar = char =>  usedChars.includes(char.toLowerCase())
 //check if guess char is letter
 const checkIfLetter = char => guessPattern.test(char)
 
@@ -134,7 +123,8 @@ return { //public functions
     checkGuess,
     resetGame,
     checkUsedChar,
-    checkIfLetter
+    checkIfLetter,
+    uniqueCharCount
 }
 })();
 

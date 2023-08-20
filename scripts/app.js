@@ -25,11 +25,11 @@ userInterface.guessInput.addEventListener("submit", e => { //on char submit
     let guessValue = userInterface.guessInput.charInput.value //guess char
     if (!gameMechanics.checkIfLetter(guessValue)) //if guess char not letter display error 
     {
-        userInterface.displayInputError("alphabetOnly")
+        userInterface.displayInputError("Alphabet letters only")
     }
     else if(gameMechanics.checkUsedChar(guessValue)) //if char already used display error
     {   
-        userInterface.displayInputError("alreadyUsed")
+        userInterface.displayInputError("You already used this letter")
     }
     else {
         gameMechanics.checkGuess(guessValue) //check if guess char correct

@@ -61,20 +61,8 @@ class UserInterface {
         this.quoteDisplay.innerHTML = `<p>The answer is: </p><p>${answer}</p>`;
     }
 
-    displayInputError(errorType) { //errors for guess char input
-        switch (errorType) {
-            case 'alphabetOnly':
-                this.inputErrorDisplay.innerHTML = "Alphabet letters only";
-                break;
-            case 'alreadyUsed':
-                this.inputErrorDisplay.innerHTML = "You already used this letter";
-                break;
-            case 'wrongGuess':
-                this.inputErrorDisplay.innerHTML = "Wrong guess!";
-                break;
-            default:
-                this.inputErrorDisplay.innerHTML = ""; // default case, clear the error display
-        }
+    displayInputError(err) { //errors for guess char input
+        this.inputErrorDisplay.innerHTML = err;
     }
 
     displayNumError(num) { //display num of errors
